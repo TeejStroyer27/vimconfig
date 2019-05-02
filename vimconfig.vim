@@ -22,7 +22,7 @@ set nocompatible
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme murphy "Enable If color isn't set elsewhere
+" colorscheme iceberg "Add this to root vimrc that sources vimrc with plugin
 syntax enable
 set background=dark
 

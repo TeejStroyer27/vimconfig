@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'
+  Plug 'cocopon/iceberg.vim'
 call plug#end()
 
 "Plugin-Configuration
