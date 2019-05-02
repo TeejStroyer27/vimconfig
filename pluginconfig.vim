@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
   Plug 'yggdroot/indentline'
-  Plug 'altercation/vim-colors-solarized'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'
   Plug 'cocopon/iceberg.vim'
