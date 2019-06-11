@@ -9,6 +9,7 @@
 " Searching
 " Spaces And Tabs
 " UI Config
+" Remappings
 "----------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,6 +82,11 @@ set foldenable        " Enables folding
 set foldlevelstart=10 " Open Most Folds by Default
 set foldmethod=indent " Fold based on indention
 set foldnestmax=10    " Nested Fold Max
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:tnoremap <Esc> <C-\><C-n>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Correct Cursor For Terminal
