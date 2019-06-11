@@ -9,7 +9,6 @@
 " Searching
 " Spaces And Tabs
 " UI Config
-" Remappings
 "----------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,6 +42,7 @@ xmap <Leader>y "*y
 xmap <Leader>Y "+y
 xmap <Leader>p "*p
 xmap <Leader>P "+p
+tnoremap <Esc> <C-\><C-n>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spaces And Tabs
@@ -82,11 +82,6 @@ set foldenable        " Enables folding
 set foldlevelstart=10 " Open Most Folds by Default
 set foldmethod=indent " Fold based on indention
 set foldnestmax=10    " Nested Fold Max
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:tnoremap <Esc> <C-\><C-n>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Correct Cursor For Terminal
