@@ -1,14 +1,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Table Of Contents - Sorted Alphabetically, although the sections are not
+" Table Of Contents - Sorted Alphabetically SORTA
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors
-" Correct Cursor For Terminal
-" Folding
 " General
+" Colors
+" Folding
 " Mappings
 " Searching
 " Spaces And Tabs
 " UI Config
+" xTerminal
 "----------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,6 +29,14 @@ syntax enable
 set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Folding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldenable        " Enables folding
+set foldlevelstart=10 " Open Most Folds by Default
+set foldmethod=indent " Fold based on indention
+set foldnestmax=10    " Nested Fold Max
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader ="\<Space>"
@@ -43,6 +51,14 @@ xmap <Leader>Y "+y
 xmap <Leader>p "*p
 xmap <Leader>P "+p
 tnoremap <Esc> <C-\><C-n>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Searching
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch    " Highlight matches
+set ignorecase
+set incsearch   " Search as characters are entered
+set smartcase
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spaces And Tabs
@@ -68,23 +84,7 @@ set showmatch      " Highlight matching [{()}]
 set wildmenu       " Visual autocomplete for command menu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Searching
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set hlsearch    " Highlight matches
-set ignorecase
-set incsearch   " Search as characters are entered
-set smartcase
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Folding
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldenable        " Enables folding
-set foldlevelstart=10 " Open Most Folds by Default
-set foldmethod=indent " Fold based on indention
-set foldnestmax=10    " Nested Fold Max
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Correct Cursor For Terminal
+" xTerminal
 " Copy To Vimrc Where Sourcing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Windows
@@ -97,4 +97,3 @@ set foldnestmax=10    " Nested Fold Max
 "let &t_SI ='\<Esc>]50;CursorShape=1\x7'
 "let &t_SR ='\<Esc>]50;CursorShape=2\x7'
 "let &t_EI ='\<Esc>]50;CursorShape=0\x7'
-
