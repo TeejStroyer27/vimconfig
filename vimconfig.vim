@@ -5,6 +5,7 @@
 " Correct Cursor For Terminal
 " Folding
 " General
+" Mappings
 " Searching
 " Spaces And Tabs
 " UI Config
@@ -18,6 +19,7 @@ set ff=unix        " Set File Format to unix (windows can open unix file endings
 set history=500    " Sets how many lines of history VIM has to remember
 set mouse=a
 set nocompatible
+set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
@@ -25,6 +27,21 @@ set nocompatible
 " colorscheme iceberg "Add this to root vimrc that sources vimrc with plugin
 syntax enable
 set background=dark
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader ="\<Space>"
+nmap <Space> <NOP>
+imap jj <Esc>
+nmap <Leader>y "*y
+nmap <Leader>Y "+y
+nmap <Leader>p "*p
+nmap <Leader>P "+p
+xmap <Leader>y "*y
+xmap <Leader>Y "+y
+xmap <Leader>p "*p
+xmap <Leader>P "+p
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spaces And Tabs
@@ -67,6 +84,7 @@ set foldnestmax=10    " Nested Fold Max
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Correct Cursor For Terminal
+" Copy To Vimrc Where Sourcing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Windows
 "let &t_ti.='\e[1 q'

@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'
   Plug 'cocopon/iceberg.vim'
+  Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
 "Plugin-Configuration
