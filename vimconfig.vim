@@ -65,6 +65,7 @@ set smartcase
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab     " Tabs are spaces
 set expandtab     " Tabs are spaces
+set shiftwidth=2
 set softtabstop=2 " Number of spaces in tab when editing
 set tabstop=2   " Visual spaces per tab
 
@@ -87,11 +88,16 @@ set wildmenu       " Visual autocomplete for command menu
 " xTerminal
 " Copy To Vimrc Where Sourcing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "Windows
 "let &t_ti.='\e[1 q'
 "let &t_SI.='\e[5 q'
 "let &t_EI.='\e[1 q'
 "let &t_te.='\e[0 q'
+
+"Ubuntu
+"let &t_SI = "\e[6 q"
+"let &t_EI = "\e[2 q"
 
 "MacOs and ITerm
 "let &t_SI ='\<Esc>]50;CursorShape=1\x7'
