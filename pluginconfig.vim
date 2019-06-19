@@ -3,12 +3,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
   Plug 'cocopon/iceberg.vim'
-  Plug 'dart-lang/dart-vim-plugin'
   Plug 'itchyny/lightline.vim'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'
   Plug 'scrooloose/nerdtree'
   Plug 'yggdroot/indentline'
+  Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
 "Plugin-Configuration

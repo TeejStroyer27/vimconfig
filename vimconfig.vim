@@ -64,8 +64,8 @@ set smartcase
 " Spaces And Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab     " Tabs are spaces
-set expandtab     " Tabs are spaces
 set softtabstop=2 " Number of spaces in tab when editing
+set shiftwidth=2
 set tabstop=2   " Visual spaces per tab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
