@@ -20,7 +20,7 @@ set history=500    " Sets how many lines of history VIM has to remember
 set mouse=a
 set nocompatible
 set noswapfile
-
+set backspace=indent,eol,start
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
