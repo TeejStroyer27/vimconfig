@@ -20,6 +20,7 @@ set history=500    " Sets how many lines of history VIM has to remember
 set mouse=a
 set nocompatible
 set noswapfile
+set conceallevel=0 " Prevents hiding of quotes in json
 set backspace=indent,eol,start
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
