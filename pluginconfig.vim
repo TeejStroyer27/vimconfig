@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'
   Plug 'scrooloose/nerdtree'
-  Plug 'yggdroot/indentline'
   Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
@@ -17,4 +16,4 @@ let g:rainbow_active=1
 let g:solarized_termcolors=256
 map <C-o> :NERDTreeToggle<CR>
 set laststatus=2
-set conceallevel=0
+set conceallevel=0 " Prevents hiding of quotes in json
