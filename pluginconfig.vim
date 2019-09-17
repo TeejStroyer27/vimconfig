@@ -17,3 +17,4 @@ let g:rainbow_active=1
 let g:solarized_termcolors=256
 map <C-o> :NERDTreeToggle<CR>
 set laststatus=2
+set conceallevel=0
