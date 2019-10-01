@@ -14,6 +14,7 @@ call plug#end()
 let NERDTreeShowHidden=1
 let g:rainbow_active=1
 let g:solarized_termcolors=256
-map <C-o> :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<Enter>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 set laststatus=2
 set conceallevel=0 " Prevents hiding of quotes in json

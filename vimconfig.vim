@@ -41,7 +41,7 @@ set foldnestmax=10    " Nested Fold Max
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader ="\<Space>"
-nmap <Space> <NOP>
+nnoremap <Space> <NOP>
 imap jj <Esc>
 nmap <Leader>y "*y
 nmap <Leader>Y "+y
