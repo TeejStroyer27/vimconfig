@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Table Of Contents - Sorted Alphabetically SORTA
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
 " General
 " Colors
 " Folding
@@ -10,6 +11,43 @@
 " UI Config
 " xTerminal
 "----------------------------------------------------------------------------------
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+  Plug 'OmniSharp/omnisharp-vim'           "Dot Net Server
+  Plug 'Xuyuanp/nerdtree-git-plugin'       "file explorer git symbols
+  Plug 'airblade/vim-gitgutter'            "git gutter symbols
+  Plug 'cocopon/iceberg.vim'               "colorscheme
+  Plug 'morhetz/gruvbox'                   "colorscheme
+  Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
+  Plug 'itchyny/lightline.vim'
+  Plug 'lilydjwg/colorizer'
+  Plug 'luochen1990/rainbow'               "Rainbow Braces
+  Plug 'prabirshrestha/async.vim'          "async search
+  Plug 'prabirshrestha/asyncomplete.vim'   "async autocomplete
+  Plug 'scrooloose/nerdtree'               "file explorer
+  Plug 'w0rp/ale'                          "lenter
+call plug#end()
+
+let NERDTreeShowHidden=1
+let g:OmniSharp_highlight_types = 2
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_timeout = 3
+let g:ale_linters = { 'cs': ['OmniSharp'] }
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_force_refresh_on_context_changed = 1
+let g:rainbow_active=1
+let g:solarized_termcolors=256
+
+augroup omnisharp_commands
+    autocmd!
+    " Show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -22,10 +60,13 @@ set nocompatible
 set noswapfile
 set conceallevel=0 " Prevents hiding of quotes in json
 set backspace=indent,eol,start
+set laststatus=2
+set conceallevel=0 " Prevents hiding of quotes in json
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" colorscheme iceberg "Add this to root vimrc that sources vimrc with plugin
+colorscheme gruvbox 
 syntax enable
 set background=dark
 
@@ -40,8 +81,8 @@ set foldnestmax=10    " Nested Fold Max
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader ="\<Space>"
 nnoremap <Space> <NOP>
+let mapleader ="\<Space>"
 imap jj <Esc>
 nmap <Leader>y "*y
 nmap <Leader>Y "+y
@@ -52,6 +93,8 @@ xmap <Leader>Y "+y
 xmap <Leader>p "*p
 xmap <Leader>P "+p
 tnoremap <Esc> <C-\><C-n>
+nmap <Leader>f :NERDTreeToggle<Enter>
+nmap <silent> <Leader>v :NERDTreeFind<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -68,14 +111,14 @@ set expandtab     " Tabs are spaces
 set expandtab     " Tabs are spaces
 set shiftwidth=2
 set softtabstop=2 " Number of spaces in tab when editing
-set tabstop=2   " Visual spaces per tab
+set tabstop=2     " Visual spaces per tab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype indent on
 filetype plugin on 
-set completeopt=longest,menuone,preview
+set completeopt=menuone,noinsert,noselect,preview
 set cursorline     " Highlight line youre cursor is on
 set lazyredraw     " Redraws screen only when it matters
 set nowrap         " Doesn't wrap lines
@@ -89,7 +132,6 @@ set wildmenu       " Visual autocomplete for command menu
 " xTerminal
 " Copy To Vimrc Where Sourcing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "Windows
 "let &t_ti.='\e[1 q'
 "let &t_SI.='\e[5 q'
@@ -104,3 +146,4 @@ set wildmenu       " Visual autocomplete for command menu
 "let &t_SI ='\<Esc>]50;CursorShape=1\x7'
 "let &t_SR ='\<Esc>]50;CursorShape=2\x7'
 "let &t_EI ='\<Esc>]50;CursorShape=0\x7'
+
