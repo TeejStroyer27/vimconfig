@@ -38,7 +38,6 @@ let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_timeout = 3
-
 let g:rainbow_active=1
 let g:solarized_termcolors=256
 
@@ -46,7 +45,7 @@ let ycm_trigger_key = '<C-n>'
 " disable auto_triggering ycm suggestions pane and instead
 " use semantic completion only on Ctrl+n
 let ycm_trigger_key = '<C-n>'
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
 let g:ycm_key_invoke_completion = ycm_trigger_key
 
 " this is some arcane magic to allow cycling through the YCM options
