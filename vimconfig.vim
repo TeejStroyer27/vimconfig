@@ -28,20 +28,41 @@ call plug#begin('~/.vim/plugged')
   Plug 'prabirshrestha/async.vim'          "async search
   Plug 'prabirshrestha/asyncomplete.vim'   "async autocomplete
   Plug 'scrooloose/nerdtree'               "file explorer
-  Plug 'w0rp/ale'                          "lenter
+  Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
+  Plug 'w0rp/ale'                          "linter
 call plug#end()
 
+let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_server_stdio = 1
 let g:OmniSharp_timeout = 3
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_force_refresh_on_context_changed = 1
+
 let g:rainbow_active=1
 let g:solarized_termcolors=256
+
+let ycm_trigger_key = '<C-n>'
+" disable auto_triggering ycm suggestions pane and instead
+" use semantic completion only on Ctrl+n
+let ycm_trigger_key = '<C-n>'
+let g:ycm_auto_trigger = 0
+let g:ycm_key_invoke_completion = ycm_trigger_key
+
+" this is some arcane magic to allow cycling through the YCM options
+" with the same key that opened it.
+" See http://vim.wikia.com/wiki/Improve_completion_popup_menu for more info.
+let g:ycm_key_list_select_completion = ['<TAB>', '<C-j>']
+inoremap <expr> ycm_trigger_key pumvisible() ? "<C-j>" : ycm_trigger_key;
+
+"ale
+let g:ale_linters = { 'cs': ['OmniSharp'] }
+let g:ale_fix_on_save = 1 " fix files on save
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_delay = 1000 " lint after 1000ms after changes are made both on insert mode and normal mode
+let g:ale_sign_error = '✗\ '
+let g:ale_sign_warning = '⚠\ ' " use nice symbols for errors and warnings
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], } " fixer configurations
 
 augroup omnisharp_commands
     autocmd!
@@ -66,7 +87,7 @@ set conceallevel=0 " Prevents hiding of quotes in json
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme gruvbox 
+colorscheme gruvbox
 syntax enable
 set background=dark
 
@@ -117,7 +138,7 @@ set tabstop=2     " Visual spaces per tab
 " UI Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype indent on
-filetype plugin on 
+filetype plugin on
 set completeopt=menuone,noinsert,noselect,preview
 set cursorline     " Highlight line youre cursor is on
 set lazyredraw     " Redraws screen only when it matters
@@ -147,3 +168,4 @@ set wildmenu       " Visual autocomplete for command menu
 "let &t_SR ='\<Esc>]50;CursorShape=2\x7'
 "let &t_EI ='\<Esc>]50;CursorShape=0\x7'
 
+Plug 'valloric/youcompleteme'
