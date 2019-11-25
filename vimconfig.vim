@@ -25,8 +25,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
-  Plug 'prabirshrestha/async.vim'          "async search
-  Plug 'prabirshrestha/asyncomplete.vim'   "async autocomplete
   Plug 'scrooloose/nerdtree'               "file explorer
   Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
   Plug 'w0rp/ale'                          "linter
@@ -72,6 +70,7 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf-8
 set autoread       " Set to auto read when a file is changed from the outside
 set ff=unix        " Set File Format to unix (windows can open unix file endings)
 set history=500    " Sets how many lines of history VIM has to remember
@@ -166,5 +165,3 @@ set wildmenu       " Visual autocomplete for command menu
 "let &t_SI ='\<Esc>]50;CursorShape=1\x7'
 "let &t_SR ='\<Esc>]50;CursorShape=2\x7'
 "let &t_EI ='\<Esc>]50;CursorShape=0\x7'
-
-Plug 'valloric/youcompleteme'
