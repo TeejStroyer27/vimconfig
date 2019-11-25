@@ -26,7 +26,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
   Plug 'scrooloose/nerdtree'               "file explorer
-  Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
+  Plug 'valloric/youcompleteme', { 'do': './install.py' }
   Plug 'w0rp/ale'                          "linter
 call plug#end()
 
