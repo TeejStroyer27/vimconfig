@@ -22,6 +22,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'cocopon/iceberg.vim'               "colorscheme
   Plug 'morhetz/gruvbox'                   "colorscheme
   Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
+  Plug 'mxw/vim-jsx'
+  Plug 'pangloss/vim-javascript'
   Plug 'itchyny/lightline.vim'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
