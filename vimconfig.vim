@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Table Of Contents - Sorted Alphabetically SORTA
+"Table Of Contents - Sorted Alphabetically SORTA
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 " General
@@ -16,7 +16,6 @@
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-  Plug 'OmniSharp/omnisharp-vim'           "Dot Net Server
   Plug 'Xuyuanp/nerdtree-git-plugin'       "file explorer git symbols
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
   Plug 'cocopon/iceberg.vim'               "colorscheme
@@ -28,46 +27,38 @@ call plug#begin('~/.vim/plugged')
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
   Plug 'scrooloose/nerdtree'               "file explorer
-  Plug 'valloric/youcompleteme', { 'do': './install.py' }
-  Plug 'w0rp/ale'                          "linter
+  Plug 'valloric/youcompleteme', { 'do': './install.py --all --system-libclang' }
 call plug#end()
 
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_timeout = 3
 let g:rainbow_active=1
-let g:solarized_termcolors=256
-
-let ycm_trigger_key = '<C-n>'
-" disable auto_triggering ycm suggestions pane and instead
-" use semantic completion only on Ctrl+n
 let ycm_trigger_key = '<C-n>'
 let g:ycm_auto_trigger = 1
+let g:ycm_min_num_of_chars_for_completion = 0
+let g:ycm_min_num_identifier_candidate_chars = 0
+let g:ycm_max_num_candidates = 50
+let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_filetype_whitelist = {'*': 1}
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_error_symbol = '!!'
+let g:ycm_warning_symbol = '??'
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_echo_current_diagnostic = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_always_populate_location_list = 1
+let g:ycm_auto_start_csharp_server = 1
+let g:ycm_auto_stop_csharp_server = 1
+let g:ycm_csharp_server_port = 0
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_disable_for_files_larger_than_kb = 1000
 let g:ycm_key_invoke_completion = ycm_trigger_key
-
-" this is some arcane magic to allow cycling through the YCM options
-" with the same key that opened it.
-" See http://vim.wikia.com/wiki/Improve_completion_popup_menu for more info.
 let g:ycm_key_list_select_completion = ['<TAB>', '<C-j>']
 inoremap <expr> ycm_trigger_key pumvisible() ? "<C-j>" : ycm_trigger_key;
-
-"ale
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-let g:ale_fix_on_save = 1 " fix files on save
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_delay = 1000 " lint after 1000ms after changes are made both on insert mode and normal mode
-"let g:ale_sign_error = '✗\ '
-"let g:ale_sign_warning = '⚠\ ' " use nice symbols for errors and warnings
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], } " fixer configurations
-
-augroup omnisharp_commands
-    autocmd!
-    " Show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -82,7 +73,6 @@ set noswapfile
 set conceallevel=0 " Prevents hiding of quotes in json
 set backspace=indent,eol,start
 set laststatus=2
-set conceallevel=0 " Prevents hiding of quotes in json
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
@@ -129,10 +119,11 @@ set smartcase
 " Spaces And Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab     " Tabs are spaces
-set expandtab     " Tabs are spaces
-set shiftwidth=2
+set shiftwidth=2  " Number space characters for indentation
 set softtabstop=2 " Number of spaces in tab when editing
 set tabstop=2     " Visual spaces per tab
+set smarttab
+retab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI Config
