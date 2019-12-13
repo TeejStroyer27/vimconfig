@@ -18,10 +18,8 @@
 call plug#begin('~/.vim/plugged')
   Plug 'Xuyuanp/nerdtree-git-plugin'       "file explorer git symbols
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
-  Plug 'cocopon/iceberg.vim'               "colorscheme
-  Plug 'morhetz/gruvbox'                   "colorscheme
-  Plug 'ajh17/spacegray.vim'               "colorscheme
-  Plug 'joshdick/onedark.vim'              "colorscheme
+  Plug 'tomasiser/vim-code-dark'           "colorscheme
+  Plug 'bling/vim-airline'
   Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
@@ -36,6 +34,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let g:rainbow_active=1
 let ycm_trigger_key = '<C-n>'
+let g:airline_theme = 'codedark'
 let g:ycm_auto_trigger = 1
 let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_min_num_identifier_candidate_chars = 0
@@ -65,24 +64,24 @@ inoremap <expr> ycm_trigger_key pumvisible() ? "<C-j>" : ycm_trigger_key;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8
 set autoread       " Set to auto read when a file is changed from the outside
+set backspace=indent,eol,start
+set conceallevel=0 " Prevents hiding of quotes in json
+set encoding=utf-8
 set ff=unix        " Set File Format to unix (windows can open unix file endings)
+set guifont=Menlo\ Regular:h14
 set history=500    " Sets how many lines of history VIM has to remember
+set laststatus=2
 set mouse=a
 set nocompatible
 set noswapfile
-set conceallevel=0 " Prevents hiding of quotes in json
-set backspace=indent,eol,start
-set laststatus=2
-set guifont=Menlo\ Regular:h14
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme onedark
-syntax enable
+colorscheme codedark
 set background=dark
+syntax enable
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
@@ -97,7 +96,6 @@ set foldnestmax=10    " Nested Fold Max
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Space> <NOP>
 let mapleader ="\<Space>"
-imap jj <Esc>
 nmap <Leader>y "*y
 nmap <Leader>Y "+y
 nmap <Leader>p "*p
@@ -121,12 +119,12 @@ set smartcase
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spaces And Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+retab
 set expandtab     " Tabs are spaces
 set shiftwidth=2  " Number space characters for indentation
+set smarttab
 set softtabstop=2 " Number of spaces in tab when editing
 set tabstop=2     " Visual spaces per tab
-set smarttab
-retab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI Config
