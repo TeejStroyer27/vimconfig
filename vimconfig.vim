@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
   Plug 'cocopon/iceberg.vim'               "colorscheme
   Plug 'morhetz/gruvbox'                   "colorscheme
+  Plug 'ajh17/spacegray.vim'               "colorscheme
+  Plug 'joshdick/onedark.vim'              "colorscheme
   Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
@@ -73,11 +75,12 @@ set noswapfile
 set conceallevel=0 " Prevents hiding of quotes in json
 set backspace=indent,eol,start
 set laststatus=2
+set guifont=Menlo\ Regular:h14
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme gruvbox
+colorscheme onedark
 syntax enable
 set background=dark
 
