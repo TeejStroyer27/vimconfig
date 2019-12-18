@@ -9,6 +9,7 @@
 " Searching
 " Spaces And Tabs
 " UI Config
+" NEOVIM ONLY
 " xTerminal
 "----------------------------------------------------------------------------------
 
@@ -81,6 +82,7 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme codedark
 set background=dark
+set t_Co=256
 syntax enable
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,6 +113,7 @@ nmap <silent> <Leader>v :NERDTreeFind<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set hlsearch    " Highlight matches
 set ignorecase
 set incsearch   " Search as characters are entered
@@ -140,6 +143,13 @@ set previewheight=5
 set showcmd        " Show Command in bottom bar
 set showmatch      " Highlight matching [{()}]
 set wildmenu       " Visual autocomplete for command menu
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NEOVIM ONLY
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+  set inccommand=split " Live Preview When Searching/Replacing
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " xTerminal
