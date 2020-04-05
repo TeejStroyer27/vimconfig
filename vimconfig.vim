@@ -94,7 +94,7 @@ xmap <leader>Y "+y
 xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
-nmap <leader>e :Vexplore<Enter>
+nmap <leader>e :Lexplore<Enter>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
