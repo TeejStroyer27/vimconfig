@@ -29,8 +29,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 
-let NERDTreeQuitOnOpen=1
-let NERDTreeShowHidden=1
 let g:rainbow_active=1
 let g:airline_theme = 'codedark'
 let g:coc_global_extensions=['coc-omnisharp', 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-python']
