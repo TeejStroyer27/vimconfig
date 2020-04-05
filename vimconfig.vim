@@ -17,17 +17,14 @@
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-  Plug 'Xuyuanp/nerdtree-git-plugin'       "file explorer git symbols
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
   Plug 'tomasiser/vim-code-dark'           "colorscheme
   Plug 'bling/vim-airline'
   Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
   Plug 'mxw/vim-jsx'
-  Plug 'pangloss/vim-javascript'
   Plug 'itchyny/lightline.vim'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
-  Plug 'scrooloose/nerdtree'               "file explorer
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
@@ -37,9 +34,6 @@ let NERDTreeShowHidden=1
 let g:rainbow_active=1
 let g:airline_theme = 'codedark'
 let g:coc_global_extensions=['coc-omnisharp', 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-python']
-
-" Remap for rename current word
-nmap <leader>lr <Plug>(coc-rename)
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -100,13 +94,11 @@ xmap <leader>Y "+y
 xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
-nmap <leader>t :NERDTreeToggle<Enter>
-nmap <silent> <leader>v :NERDTreeFind<CR>
+nmap <leader>e :Vexplore<Enter>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set hlsearch    " Highlight matches
 set ignorecase
 set incsearch   " Search as characters are entered
@@ -137,6 +129,12 @@ set showcmd        " Show Command in bottom bar
 set showmatch      " Highlight matching [{()}]
 set wildmenu       " Visual autocomplete for command menu
 
+let g:netrw_banner = 1
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 50 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NEOVIM ONLY
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -147,19 +145,14 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COC 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" if hidden is not set, TextEdit might fail.
-set hidden
-" Some servers have issues with backup files, see #649
-set nobackup
+set hidden   " if hidden is not set, TextEdit might fail.
+set nobackup " Some servers have issues with backup files, see #649
 set nowritebackup
-" Better display for messages
-set cmdheight=2
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes
+set cmdheight=2    " Better display for messages
+set updatetime=300 " You will have bad experience for diagnostic messages when it's default 4000.
+set shortmess+=c   " don't give |ins-completion-menu| messages.
+set signcolumn=yes " always show signcolumns
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -167,10 +160,12 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
@@ -195,7 +190,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-" Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
