@@ -30,7 +30,7 @@ call plug#end()
 
 let g:rainbow_active=1
 let g:airline_theme = 'codedark'
-let g:coc_global_extensions=['coc-omnisharp', 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-python']
+let g:coc_global_extensions=['coc-explorer','coc-omnisharp', 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-python']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -53,6 +53,9 @@ set noswapfile
 colorscheme codedark
 set background=dark
 set t_Co=256
+if (has("termguicolors"))
+  set termguicolors
+endif
 syntax enable
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,7 +80,7 @@ xmap <leader>Y "+y
 xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
-nmap <leader>e :Lexplore<Enter>
+nmap <space>e :CocCommand explorer<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
