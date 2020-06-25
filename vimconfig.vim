@@ -17,14 +17,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
-  Plug 'tomasiser/vim-code-dark'           "colorscheme
-  Plug 'lilydjwg/colorizer'
+  Plug 'lilydjwg/colorizer'                "colors hex
+  Plug 'gruvbox-community/gruvbox'         "gruvbox
   Plug 'luochen1990/rainbow'               "Rainbow Braces
   Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 
 let g:rainbow_active=1
-let g:airline_theme = 'codedark'
 let g:coc_global_extensions=['coc-explorer','coc-omnisharp', 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-python']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -45,7 +44,7 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme codedark
+colorscheme gruvbox
 set background=dark
 set t_Co=256
 if (has("termguicolors"))
