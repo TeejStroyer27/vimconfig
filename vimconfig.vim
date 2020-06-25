@@ -18,13 +18,8 @@
 call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
   Plug 'tomasiser/vim-code-dark'           "colorscheme
-  Plug 'bling/vim-airline'
-  Plug 'dart-lang/dart-vim-plugin'         "Dart Language support
-  Plug 'mxw/vim-jsx'
-  Plug 'itchyny/lightline.vim'
   Plug 'lilydjwg/colorizer'
   Plug 'luochen1990/rainbow'               "Rainbow Braces
-  Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 
