@@ -9,8 +9,7 @@
 " Searching
 " Spaces And Tabs
 " UI Config
-" NEOVIM ONLY
-" * NVIM LSP
+" LSP
 "----------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -22,14 +21,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'gruvbox-community/gruvbox'         "gruvbox
   Plug 'luochen1990/rainbow'               "Rainbow Braces
   Plug 'dart-lang/dart-vim-plugin'
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'tjdevries/nlua.nvim'
   Plug 'tjdevries/lsp_extensions.nvim'
 call plug#end()
 
+let g:lsc_auto_map = v:true
 let g:rainbow_active=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -44,7 +42,6 @@ set guifont=Menlo\ Regular:h14
 set history=500    " Sets how many lines of history VIM has to remember
 set laststatus=2
 set mouse=a
-set nocompatible
 set noerrorbells
 set noswapfile
 set updatetime=50
@@ -82,7 +79,6 @@ xmap <leader>Y "+y
 xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
-nmap <space>e :CocCommand explorer<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -109,6 +105,7 @@ filetype indent on
 filetype plugin on
 set completeopt=menuone,noinsert,noselect,preview
 set cursorline     " Highlight line youre cursor is on
+set inccommand=split " Live Preview When Searching/Replacing
 set lazyredraw     " Redraws screen only when it matters
 set nowrap         " Doesn't wrap lines
 set number relativenumber         " Show Line numbers
@@ -118,30 +115,22 @@ set showcmd        " Show Command in bottom bar
 set showmatch      " Highlight matching [{()}]
 set wildmenu       " Visual autocomplete for command menu
 
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NEOVIM ONLY
+" LSP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
-  set inccommand=split " Live Preview When Searching/Replacing
-
-  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-  nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-  nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+  nnoremap <leader>a :lua vim.lsp.buf.code_action()<CR>
+  nnoremap <leader>r :lua vim.lsp.buf.rename()<CR>
   nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
   " Use <Tab> and <S-Tab> to navigate through popup menu
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -149,10 +138,12 @@ if has('nvim')
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
   "Language Servers
-  lua require'nvim_lsp'.tsserver.setup{}
-  lua require'nvim_lsp'.clangd.setup{}
-  lua require'nvim_lsp'.gopls.setup{}
-  lua require'nvim_lsp'.rust_analyzer.setup{}
-  lua require'nvim_lsp'.omnisharp.setup{}
-  autocmd BufEnter * lua require'completion'.on_attach();
+  lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.omnisharp.setup{ on_attach=require'completion'.on_attach }
+  lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
+  autocmd BufEnter * lua require'completion'.on_attach()
 endif
