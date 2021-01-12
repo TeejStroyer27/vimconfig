@@ -25,6 +25,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/completion-nvim'
   Plug 'tjdevries/nlua.nvim'
   Plug 'tjdevries/lsp_extensions.nvim'
+  Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 let g:lsc_auto_map = v:true
@@ -79,6 +80,7 @@ xmap <leader>Y "+y
 xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
+nmap <leader>e :Explore<Cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -146,4 +148,5 @@ if has('nvim')
   lua require'lspconfig'.omnisharp.setup{ on_attach=require'completion'.on_attach }
   lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
   autocmd BufEnter * lua require'completion'.on_attach()
+
 endif
