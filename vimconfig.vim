@@ -15,17 +15,43 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-------- vim-plug setup ----
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+  autocmd VimEnter * PlugInstall
+endif
+"-------- end vim-plug setup ----
+set nocompatible
+
 call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'            "git gutter symbols
   Plug 'lilydjwg/colorizer'                "colors hex
   Plug 'gruvbox-community/gruvbox'         "gruvbox
   Plug 'luochen1990/rainbow'               "Rainbow Braces
-  Plug 'dart-lang/dart-vim-plugin'
-  Plug 'neovim/nvim-lspconfig'
+  Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'} "Markdown Viewer
+
+  "LSP PLUGINS
+  Plug 'neovim/nvim-lspconfig'             "LSP configuration
+  Plug 'glepnir/lspsaga.nvim'              "Pretty auto complete UI
+  Plug 'kosayoda/nvim-lightbulb'           "Code Action symbol
+  Plug 'anott03/nvim-lspinstall'           "LSP Installer
+  Plug 'alexaandru/nvim-lspupdate'         "Auto Updates/Install Configured servers
+  "COMPLETION
   Plug 'nvim-lua/completion-nvim'
-  Plug 'tjdevries/nlua.nvim'
-  Plug 'tjdevries/lsp_extensions.nvim'
-  Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 let g:lsc_auto_map = v:true
@@ -81,6 +107,9 @@ xmap <leader>p "*p
 xmap <leader>P "+p
 tnoremap <Esc> <C-\><C-n>
 nmap <leader>e :Explore<Cr>
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -120,33 +149,46 @@ set wildmenu       " Visual autocomplete for command menu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LSP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vimsyn_embed= 'l' "lua highlightin in vim file
+
 if has('nvim')
-  nnoremap <leader>a :lua vim.lsp.buf.code_action()<CR>
-  nnoremap <leader>r :lua vim.lsp.buf.rename()<CR>
-  nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+"Use Completion in every Buffer
+autocmd BufEnter * lua require'completion'.on_attach()
 
-  " Use <Tab> and <S-Tab> to navigate through popup menu
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+lua << EOF
+  local saga = require 'lspsaga'
+  saga.init_lsp_saga()
+  --code action symbol
+  vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
-  "Language Servers
-  lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.omnisharp.setup{ on_attach=require'completion'.on_attach }
-  lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
-  autocmd BufEnter * lua require'completion'.on_attach()
+  --Completion
+  local servers = { "pyright", "rust_analyzer", "tsserver", "omnisharp", "clangd" }
+  local nvim_lsp = require('lspconfig')
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {}
+  end
 
+EOF
 endif
+
+
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
+"show hover doc
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
+" show signature help
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+" rename
+nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
+" preview definition
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+" show
+nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+" jump diagnostic
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+" float terminal also you can pass the cli command in open_float_terminal function
+nnoremap <silent> <Leader>ft <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR> 
+tnoremap <silent> <Leader>ft <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
